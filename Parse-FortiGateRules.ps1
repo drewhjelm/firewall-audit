@@ -104,5 +104,6 @@ foreach ($line in $modifiedConfig) {
         $ruleList | Export-Csv "$workingFolder\rules-$fileName-$vdom-$date-$fileCount.csv"
         $fileCount++;
         $vdom = $null;
+        $ruleList = New-Object System.Collections.ArrayList;
     }
 }
