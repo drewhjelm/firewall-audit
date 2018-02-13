@@ -24,6 +24,7 @@ $fileName;
 
 $fileCount = 0;
 
+#checking for fortinet config
 if ([System.IO.File]::Exists($fortigateConfig) -eq $false) {
     Write-Output "[!] ERROR: Could not find FortiGate config file at $fortigateConfig."
     exit
@@ -47,6 +48,7 @@ $vdom;
 
 $modifiedConfig = @();
 
+#copy the loaded config to a new config, adding the dummy rule where necessary
 foreach ($line in $loadedConfig) {
     #look for the firewall policy section of the config
     if ($line.Trim() -eq "config firewall policy") {
@@ -75,7 +77,7 @@ foreach ($line in $modifiedConfig) {
         $vdomConfig = $true;
         continue;
     } 
-    #look for vdom config
+    #look for vdom name
     if (($line.Trim() -match "^edit") -and ($vdomConfig)) {
         $lineSplit = $line.Trim().Split();
         $vdom = $lineSplit[1];
@@ -98,6 +100,7 @@ foreach ($line in $modifiedConfig) {
     elseif (($line.Trim() -match "^next") -and ($policySection)) {
         $ruleList.Add($rule);
     }
+    #write all the rules to the CSV for a VDOM and get ready for the next VDOM
     if (($line.Trim() -match "^end") -and ($policySection)) {
         $policySection = $false;
         $date = Get-Date -Format yyyyMMddhhmmss
