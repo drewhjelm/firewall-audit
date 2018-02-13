@@ -1,6 +1,4 @@
-This is a collection of scripts to assist in auditing firewall rules.
-
-fortigate/Parse-FortiGateRules reads a FortiGate config file and pulls out the rules for each VDOM in the file into a CSV. 
+Parse-FortiGateRules reads a FortiGate config file and pulls out the rules for each VDOM in the file into a CSV. 
 
 Note: the fortiDummyRule.txt is required to populate all the fields into a PS object for each of the rules being added to the CSV. 
 
