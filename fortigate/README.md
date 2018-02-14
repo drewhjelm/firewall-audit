@@ -5,3 +5,5 @@ Note: the fortiDummyRule.txt is required to populate all the fields into a PS ob
 EXAMPLE 
 .\Parse-FortiGateRules.ps1 -fortiGateConfig "c:\temp\config.conf" 
 Parses a FortiGate config file and places the CSV file in the same folder where the config was found. 
+
+[Blog post](https://www.drewhjelm.com/2018/02/14/parse-fortigate-configs.html)
