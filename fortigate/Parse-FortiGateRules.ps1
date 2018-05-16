@@ -30,7 +30,7 @@ if ([System.IO.File]::Exists($fortigateConfig) -eq $false) {
     exit
 }
 else {
-    $loadedConfig = Get-Content $fortigateConfig;
+    $loadedConfig = Get-Content $fortigateConfig -Encoding UTF8;
     $workingFolder = Split-Path $fortigateConfig;
     $fileName = Split-Path $fortigateConfig -Leaf;
 }
@@ -104,7 +104,7 @@ foreach ($line in $modifiedConfig) {
     if (($line.Trim() -match "^end") -and ($policySection)) {
         $policySection = $false;
         $date = Get-Date -Format yyyyMMddhhmmss
-        $ruleList | Export-Csv "$workingFolder\rules-$fileName-$vdom-$date-$fileCount.csv"
+        $ruleList | Export-Csv -Encoding UTF8 "$workingFolder\rules-$fileName-$vdom-$date-$fileCount.csv"
         $fileCount++;
         $vdom = $null;
         $ruleList = New-Object System.Collections.ArrayList;
