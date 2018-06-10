@@ -3,20 +3,24 @@
 Parse-FortiGateRules parses rules from a FortiGate device into a CSV file.
 .DESCRIPTION
 The Parse-FortiGateRules reads a FortiGate config file and pulls out the rules for each VDOM in the file into a CSV.
-.PARAMETER NessusFilePath
+.PARAMETER fortigateConfig
 [REQUIRED] This is the path to the FortiGate config file
+.PARAMETER utf8
+[OPTIONAL] This is a switch to parse a config in UTF8 formatting. Optional.
 .EXAMPLE
 .\Parse-FortiGateRules.ps1 -fortiGateConfig "c:\temp\config.conf"
 Parses a FortiGate config file and places the CSV file in the same folder where the config was found.
 .NOTES
 Author: Drew Hjelm (@drewhjelm)
-Last Modified: 02/08/2018
+Last Modified: 06/10/2018
 #>
 Param
 (
     [Parameter(Mandatory = $true)]
-    [string]$fortigateConfig
+    [string]$fortigateConfig,
+    [switch]$utf8
 )
+
 #need some empty items to load config
 $loadedConfig;
 $workingFolder;
@@ -30,7 +34,14 @@ if ([System.IO.File]::Exists($fortigateConfig) -eq $false) {
     exit
 }
 else {
-    $loadedConfig = Get-Content $fortigateConfig;
+
+    if($utf8)
+    {
+        $loadedConfig = Get-Content $fortigateConfig -Encoding UTF8;
+    }
+    else {
+        $loadedConfig = Get-Content $fortigateConfig;
+    }
     $workingFolder = Split-Path $fortigateConfig;
     $fileName = Split-Path $fortigateConfig -Leaf;
 }
@@ -104,7 +115,14 @@ foreach ($line in $modifiedConfig) {
     if (($line.Trim() -match "^end") -and ($policySection)) {
         $policySection = $false;
         $date = Get-Date -Format yyyyMMddhhmmss
-        $ruleList | Export-Csv "$workingFolder\rules-$fileName-$vdom-$date-$fileCount.csv"
+        if($utf8)
+        {
+            $ruleList | Export-Csv -Encoding UTF8 "$workingFolder\rules-$fileName-$vdom-$date-$fileCount.csv";
+        }
+        else {
+            $ruleList | Export-Csv "$workingFolder\rules-$fileName-$vdom-$date-$fileCount.csv";
+        }
+        
         $fileCount++;
         $vdom = $null;
         $ruleList = New-Object System.Collections.ArrayList;
