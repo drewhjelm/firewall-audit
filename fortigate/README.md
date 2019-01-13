@@ -9,5 +9,5 @@ Parses a FortiGate config file and places the CSV file in the same folder where 
 [Blog post](https://www.drewhjelm.com/2018/02/14/parse-fortigate-configs.html)
 
 Other Links:
-* FortiGate hardening guides: [5.6](https://docs.fortinet.com/uploaded/files/3624/fortigate-hardening-your-fortigate-56.pdf), [5.4](https://docs.fortinet.com/uploaded/files/3585/hardening-54.pdf), [5.2](https://docs.fortinet.com/uploaded/files/2340/hardening-52.pdf)
+* FortiGate hardening guides: [6.0](https://docs.fortinet.com/uploaded/files/4286/hardening-60.pdf), [5.6](https://docs.fortinet.com/uploaded/files/3624/fortigate-hardening-your-fortigate-56.pdf), [5.4](https://docs.fortinet.com/uploaded/files/3585/hardening-54.pdf), [5.2](https://docs.fortinet.com/uploaded/files/2340/hardening-52.pdf)
 * [fgpoliciestocsv](https://github.com/maaaaz/fgpoliciestocsv) - Parses FortiGate policies into CSV using Perl and Python

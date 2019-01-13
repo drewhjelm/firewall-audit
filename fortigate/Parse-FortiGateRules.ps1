@@ -12,7 +12,7 @@ The Parse-FortiGateRules reads a FortiGate config file and pulls out the rules f
 Parses a FortiGate config file and places the CSV file in the same folder where the config was found.
 .NOTES
 Author: Drew Hjelm (@drewhjelm)
-Last Modified: 06/10/2018
+Last Modified: 01/13/19
 #>
 Param
 (
