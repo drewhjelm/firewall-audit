@@ -117,10 +117,10 @@ foreach ($line in $modifiedConfig) {
         $date = Get-Date -Format yyyyMMddhhmmss
         if($utf8)
         {
-            $ruleList | Export-Csv -Encoding UTF8 "$workingFolder\rules-$fileName-$vdom-$date-$fileCount.csv";
+            $ruleList | Export-Csv -Encoding UTF8 "$workingFolder\rules-$fileName-$vdom-$date-$fileCount.csv" -NoTypeInformation;
         }
         else {
-            $ruleList | Export-Csv "$workingFolder\rules-$fileName-$vdom-$date-$fileCount.csv";
+            $ruleList | Export-Csv "$workingFolder\rules-$fileName-$vdom-$date-$fileCount.csv" -NoTypeInformation;
         }
         
         $fileCount++;
