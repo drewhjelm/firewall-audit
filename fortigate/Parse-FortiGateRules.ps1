@@ -115,6 +115,7 @@ foreach ($line in $modifiedConfig) {
     if (($line.Trim() -match "^end") -and ($policySection)) {
         $policySection = $false;
         $date = Get-Date -Format yyyyMMddhhmmss
+        $ruleList = $ruleList | Select-Object -Skip 1
         if($utf8)
         {
             $ruleList | Export-Csv -Encoding UTF8 "$workingFolder\rules-$fileName-$vdom-$date-$fileCount.csv" -NoTypeInformation;
